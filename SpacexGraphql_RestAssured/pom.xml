@@ -6,14 +6,11 @@
 	<artifactId>graphql</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>graphql</name>
-
 	<dependencies>
-
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
 			<version>4.3.3</version>
-
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
@@ -22,14 +19,11 @@
 			<version>7.4.0</version>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20210307</version>
 		</dependency>
-
-
 	</dependencies>
 </project>
