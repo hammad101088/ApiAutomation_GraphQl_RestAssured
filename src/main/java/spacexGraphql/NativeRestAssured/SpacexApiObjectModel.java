@@ -13,7 +13,7 @@ public class SpacexApiObjectModel {
 	 */
 	public Response getPastLaunches() {
 
-		return UtilityClass.sendGraphqlRequest(SpacexResolvers.LAUNCHPAST_QUERY);
+		return UtilityClass.sendGraphqlRequest(SpacexResolvers.LAUNCHPAST_QUERY,null,null);
 	}
 
 	// graphql sample request using mutation with variables
@@ -27,7 +27,7 @@ public class SpacexApiObjectModel {
 	public Response insertUser(String name, String rocket) {
 
 		String variables = "{\"name\": \"" + name + "\",\"rocket\": \"" + rocket + "\"}";
-		return UtilityClass.sendGraphqlRequest(SpacexResolvers.INSERTUSER_MUTATION, variables);
+		return UtilityClass.sendGraphqlRequest(SpacexResolvers.INSERTUSER_MUTATION, variables,null);
 
 	}
 }

@@ -13,14 +13,7 @@ public final class UtilityClass {
 	private static RequestSpecification request = RestAssured.given();
 	public static final String BASE_URI = "https://api.spacex.land/graphql/";    //should be changed for every project
 
-	// ******* constructor *******//
-	private UtilityClass() {
-		jsonObject = new org.json.JSONObject();
-	}
-
 	// ******* request related methods *******//
-	
-
 	private static void setQuery(String query) {
 		jsonObject.put("query", query);
 	}
@@ -40,72 +33,37 @@ public final class UtilityClass {
 
 		return jsonObject.toString();
 	}
-
+	
 	/**
-	 * Send Graphql Request Using only a Query or Mutation.<br>
-	 * @param query
+	 * Send Graphql Request Using "Query or Mutation" WITH Variables or Fragments.<br>
+	 * At least you should provide "Query or Mutation"
+	 * @param query -> MANDATORY
+	 * @param variables -> OPTIONAL (Nullable)
+	 * @param fragments -> OPTIONAL (Nullable)
 	 * @return Graphql Response
-	 */
-	public static Response sendGraphqlRequest(String query) {
-		
-		UtilityClass.setQuery(query);
-		String requestBody = UtilityClass.getRequestBody();
-
-		System.out.println("sending graphql request...");
-		request.header("Content-Type", "application/json");
-		request.body(requestBody);
-		request.given().log().body();
-		Response response = request.post(BASE_URI);
-		System.out.println("getting graphql response...");
-		response.then().statusCode(200).log().body();
-		return response;
-		
-	}
-	
-	/**
-	 * Send Graphql Request Using "query or mutation" and variables.<br>
-	 * @param query
-	 * @param variables
-	 * @return
-	 */
-	
-	public static Response sendGraphqlRequest(String query, String variables) {
-		
-		UtilityClass.setQuery(query);
-		UtilityClass.setVariables(variables);
-		String requestBody = UtilityClass.getRequestBody();
-
-		System.out.println("sending graphql request...");
-		request.header("Content-Type", "application/json");
-		request.body(requestBody);
-		request.given().log().body();
-		Response response = request.post(BASE_URI);
-		System.out.println("getting graphql response...");
-		response.then().statusCode(200).log().body();
-		return response;
-		
-	}
-	
-	/**
-	 * Send Graphql Request Using "Query or Mutation", variables, and fragments.<br>
-	 * @param query
-	 * @param variables
-	 * @param fragments
-	 * @return
 	 */
 	public static Response sendGraphqlRequest(String query, String variables, String fragments) {
 		
-		UtilityClass.setQuery(query);
-		UtilityClass.setVariables(variables);
-		UtilityClass.setFragments(fragments);
+		if(query != null) {
+		UtilityClass.setQuery(query);}
+		
+		if (variables !=null) {
+		UtilityClass.setVariables(variables);}
+		
+		if (fragments != null) {
+		UtilityClass.setFragments(fragments);}
+		
 		String requestBody = UtilityClass.getRequestBody();
-
-		System.out.println("sending graphql request...");
+		
+		//request actions
+		System.out.println(">>> sending graphql request >>>");
 		request.header("Content-Type", "application/json");
 		request.body(requestBody);
-		request.given().log().body();
+		request.given().log().all();
+		
+		//response actions
 		Response response = request.post(BASE_URI);
-		System.out.println("getting graphql response...");
+		System.out.println("<<< getting graphql response <<<");
 		response.then().statusCode(200).log().body();
 		return response;
 		
